@@ -1,4 +1,5 @@
 import FormGroup from '../FormGroup';
+import Input from '../Input';
 import Select from '../Select';
 
 import { Container } from './styles';
@@ -18,6 +19,26 @@ export default function EnterprisesForm() {
           <option value="">Pronto pra morar</option>
         </Select>
       </FormGroup>
+
+      <FormGroup>
+        <Input placeholder="Nome do empreendimento" />
+      </FormGroup>
+
+      <FormGroup>
+        <Select>
+          <option value="">Residencial</option>
+          <option value="">Comercial</option>
+        </Select>
+      </FormGroup>
+
+      <FormGroup>
+        <Input placeholder="CEP" />
+      </FormGroup>
+
+      <FormGroup>
+        <Input placeholder="Número da residência" />
+      </FormGroup>
     </Container>
+
   );
 }

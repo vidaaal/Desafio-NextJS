@@ -3,8 +3,9 @@ import styled from 'styled-components';
 export const Container = styled.div`
   select {
     width: 100%;
-    height: 52px;
+    height: 38px;
     font-size: 1rem;
+    text-indent: 0px;
   }
   
   .input-border {

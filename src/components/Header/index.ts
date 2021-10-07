@@ -36,10 +36,13 @@ export default styled.header`
       background: transparent;
       
       display: flex;
-      align-items: center;
-
+      
       padding: 4px 6px;
+      text-decoration: none;
+    }
 
+    h2 {
+      margin-left: 16px;
     }
   }
 `;

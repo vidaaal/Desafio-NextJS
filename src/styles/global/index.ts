@@ -22,7 +22,7 @@ export default createGlobalStyle`
     background: none;
   }
 
-  html, body, button, input, textarea {
+  html, body, button, input, textarea, select {
     font-family: 'inter', sans-serif;
     color: ${({ theme }) => theme.text.primary}
   }

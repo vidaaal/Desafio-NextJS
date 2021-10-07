@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  min-height: 100vh;
+  position: relative;
+`;
+
+export const Wrapper = styled.div`
   max-width: 1140px;
   width: 100%;
   margin: 0 auto;

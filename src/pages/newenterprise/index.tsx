@@ -13,10 +13,11 @@ export default function newCard() {
           <Link href="/">
             <a>
               <img src="/images/ArrowIcon.svg" alt="" />
-
               <h2>Cadastro de empreendimento</h2>
             </a>
+
           </Link>
+
         </main>
         <div />
       </Header>
