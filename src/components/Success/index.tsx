@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import { Overlay } from './styles';
 
-export default function Loader() {
+export default function Success() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -16,7 +16,9 @@ export default function Loader() {
 
   return ReactDOM.createPortal(
     <Overlay>
-      <div className="loader" />
+      <div className="loader">
+        worked
+      </div>
     </Overlay>,
     document.getElementById('loader-root')!,
   );

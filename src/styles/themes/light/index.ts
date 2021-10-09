@@ -18,4 +18,8 @@ export default {
   outline: {
     gray_dark: '#BBB8D9',
   },
+
+  danger: {
+    main: '#FC5050',
+  },
 };

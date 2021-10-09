@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   select {
@@ -12,6 +12,8 @@ export const Container = styled.div`
     width: 100%;
     height: 2px;
     background: ${({ theme }) => theme.outline.gray_dark};
+
+    
 
   }
 `;

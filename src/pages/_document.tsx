@@ -46,6 +46,7 @@ export default class MyDocument extends Document {
         <body>
           <Main />
           <div id="loader-root" />
+          <div className="success-root" />
           <NextScript />
         </body>
       </Html>

@@ -12,7 +12,7 @@ export default createGlobalStyle`
     background: ${({ theme }) => theme.background.gray}
   }
 
-  button, select {
+  button, select, a {
     cursor: pointer;
     border: 0;
   }

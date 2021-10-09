@@ -21,5 +21,9 @@ declare module 'styled-components' {
     outline: {
       gray_dark: string,
     },
+
+    danger: {
+      main: string;
+    }
   }
 }

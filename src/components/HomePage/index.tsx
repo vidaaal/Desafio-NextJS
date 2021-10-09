@@ -4,12 +4,11 @@ import {
 } from 'react';
 import { api } from '../../services/api';
 
-import Card from '../Card';
 import Header from '../Header';
 import Loader from '../Loader';
 
 import {
-  Container, Wrapper, InputSearchContainer, MainContent,
+  Container, Wrapper, InputSearchContainer, MainContent, Card,
 } from './styles';
 
 interface IEnterpriseInfo {
@@ -17,7 +16,7 @@ interface IEnterpriseInfo {
   name: string;
   address: string;
   type: string;
-  state: string;
+  condition: string;
 }
 
 export default function Home() {
@@ -25,9 +24,9 @@ export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const filteredEnterprises = useMemo(() => enterprises?.filter((enterprise) => {
-    enterprise.name.toLocaleLowerCase().includes(searchTerm.toLowerCase());
-  }), []);
+  const filteredEnterprises = useMemo(() => enterprises?.filter((enterprise) => (
+    enterprise?.name?.toLowerCase().includes(searchTerm.toLowerCase())
+  )), [enterprises, searchTerm]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -48,9 +47,25 @@ export default function Home() {
     setSearchTerm(event.target.value);
   }
 
+  async function handleRemoveEnterprise(id: string) {
+    try {
+      if (window.confirm('Tem certeza?')) {
+        setIsLoading(true);
+        await api.delete(`/posts/${id}`);
+
+        const { data } = await api('/posts');
+        setEnterprises(data);
+      }
+    } catch (err: any) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   return (
     <Container>
-      <Loader isLoading={isLoading} />
+      {isLoading && <Loader />}
 
       <Header>
         <h2>Empreendimentos</h2>
@@ -75,13 +90,32 @@ export default function Home() {
 
         <MainContent>
           {filteredEnterprises?.map((enterprise) => (
-            <Card
-              key={enterprise.id}
-              name={enterprise.name}
-              address={enterprise.address}
-              state={enterprise.state}
-              type={enterprise.type}
-            />
+            <Card key={enterprise.id}>
+              <main>
+                <div className="address">
+                  <h3>{enterprise.name}</h3>
+                  <div className="actions">
+                    <Link href={`/editenterprise/${enterprise.id}`}>
+                      <a>
+                        <img src="/images/EditIcon.svg" alt="Ícone de Edição" />
+                      </a>
+                    </Link>
+                    <button type="button" onClick={() => handleRemoveEnterprise(enterprise.id)}>
+                      <img src="/images/DeleteIcon.svg" alt="Ícone de Lixeira" />
+                    </button>
+                  </div>
+                </div>
+                <p>{enterprise.address}</p>
+              </main>
+              <aside>
+                <div className="tag">
+                  <p>{enterprise.condition}</p>
+                </div>
+                <div className="tag">
+                  <p>{enterprise.type}</p>
+                </div>
+              </aside>
+            </Card>
           ))}
         </MainContent>
       </Wrapper>
