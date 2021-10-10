@@ -6,7 +6,7 @@ export const Container = styled.div`
   height: 100vh;
 `;
 
-export const Wrapper = styled.div`
+export const Form = styled.form`
   margin-top: 48px;
   display: flex;
   align-items: center;

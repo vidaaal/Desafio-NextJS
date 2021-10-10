@@ -3,7 +3,11 @@ import ReactDOM from 'react-dom';
 
 import { Overlay } from './styles';
 
-export default function Success() {
+interface ISuccess {
+  message: string;
+}
+
+export default function Success({ message }: ISuccess) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -17,7 +21,14 @@ export default function Success() {
   return ReactDOM.createPortal(
     <Overlay>
       <div className="loader">
-        worked
+        <div className="icon">
+          <img src="/images/OkIcon.svg" alt="" />
+        </div>
+        <div className="message-div">
+          <p>
+            {message}
+          </p>
+        </div>
       </div>
     </Overlay>,
     document.getElementById('loader-root')!,

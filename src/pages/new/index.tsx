@@ -1,12 +1,13 @@
 import Link from 'next/link';
 import { FormEvent, useEffect, useState } from 'react';
+import Button from '../../components/Button';
 
 import EnterprisesForm from '../../components/EnterprisesForm';
 import Header from '../../components/Header';
 import Success from '../../components/Success';
 import { api } from '../../services/api';
 
-import { Container, Wrapper } from './styles';
+import { Container, Form } from './styles';
 
 interface IHandleSubmit {
   e: FormEvent<HTMLFormElement>;
@@ -52,7 +53,7 @@ export default function newCard() {
 
   return (
     <Container>
-      {isLoading && <Success />}
+      {isLoading && <Success message="Empreendimento cadastrado com sucesso!" />}
 
       <Header>
         <main>
@@ -67,9 +68,14 @@ export default function newCard() {
         </main>
         <div />
       </Header>
-      <Wrapper>
-        <EnterprisesForm onSubmit={handleSubmit} />
-      </Wrapper>
+      <Form onSubmit={() => console.log('a')}>
+        <EnterprisesForm onSubmitNew={handleSubmit} />
+
+        <Button type="submit" disabled={!isFormValid}>
+          Cadastrar
+        </Button>
+      </Form>
     </Container>
   );
 }
+

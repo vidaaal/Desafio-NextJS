@@ -4,8 +4,8 @@ interface IButton {
   disabled: boolean;
 }
 
-export const Container = styled.div<IButton>`
-  button {
+export default styled.button<IButton>`
+  
     display: flex;
     align-items: center;
     justify-content: center;
@@ -24,7 +24,7 @@ export const Container = styled.div<IButton>`
       background: #ccc;
       cursor: default;
     }
-  }
+  
 
   margin-top: 38px;
 `;

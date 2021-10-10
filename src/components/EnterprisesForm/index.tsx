@@ -1,13 +1,14 @@
 import axios from 'axios';
 import { ChangeEvent, FormEvent, useState } from 'react';
 import useErrors from '../../hooks/useError';
+import formatCep from '../../utils/formatCep';
 import isCepValid from '../../utils/isCepValid';
 import Button from '../Button';
 import FormGroup from '../FormGroup';
 import Input from '../Input';
 import Select from '../Select';
 
-import { Form, Wrapper } from './styles';
+import { Container, Wrapper } from './styles';
 
 interface handleSubmit {
   e: FormEvent<HTMLFormElement>;
@@ -18,16 +19,20 @@ interface handleSubmit {
 }
 
 interface IEnterprisesForm {
-  onSubmit({
+  onSubmitNew?({
     e, condition, name, type, address,
   }: handleSubmit): Promise<void>;
 }
 
-interface ICepInfo {
-
+interface IEditData {
+  conditionData: string;
+  nameData: string;
+  typeData: string;
+  cepData: string;
+  houseNumberData: string;
 }
 
-export default function EnterprisesForm({ onSubmit }: IEnterprisesForm) {
+export default function EnterprisesForm({ onSubmitNew }: IEnterprisesForm) {
   const [condition, setCondition] = useState('Lançamento');
   const [name, setName] = useState('');
   const [type, setType] = useState('Residencial');
@@ -38,7 +43,7 @@ export default function EnterprisesForm({ onSubmit }: IEnterprisesForm) {
     setError, removeError, getErrorMessageByFieldName, errors,
   } = useErrors();
 
-  const isFormValid = errors.length === 0;
+  const isFormValid = (name && cep && houseNumber && errors.length === 0);
 
   function handleNameChange(e: ChangeEvent<HTMLInputElement>) {
     setName(e.target.value);
@@ -51,16 +56,16 @@ export default function EnterprisesForm({ onSubmit }: IEnterprisesForm) {
   }
 
   async function handleCepChange(e: ChangeEvent<HTMLInputElement>) {
-    setCep(e.target.value);
+    setCep(formatCep(e.target.value));
 
-    if (!e.target.value || !isCepValid(e.target.value)) {
+    if (!e.target.value || !isCepValid(e.target.value) || e.target.value.length !== 8) {
       setError({ field: 'cep', message: 'CEP inválido!' });
     } else {
       removeError('cep');
     }
 
     if (e.target.value.length === 8) {
-      const response = await axios.post(`https://viacep.com.br/ws/${e.target.value}/json`, true);
+      const response = await axios.post('https://viacep.com.br/ws/01001000/json/');
       console.log(response);
     }
   }
@@ -77,8 +82,16 @@ export default function EnterprisesForm({ onSubmit }: IEnterprisesForm) {
 
   const address = `Rua alguma coisa - ${houseNumber} awdaw`;
 
+  function handleEditPage({
+    conditionData, nameData, typeData, cepData, houseNumberData,
+  }: IEditData) {
+    setCondition(conditionData);
+    setName(nameData);
+    setType(typeData);
+  }
+
   return (
-    <Form onSubmit={(e) => onSubmit({
+    <Container onSubmit={(e) => onSubmitNew({
       e, condition, name, type, address,
     })}
     >
@@ -124,7 +137,7 @@ export default function EnterprisesForm({ onSubmit }: IEnterprisesForm) {
             placeholder="CEP *"
             value={cep}
             onChange={handleCepChange}
-            type="text"
+            maxLength={9}
           />
         </FormGroup>
 
@@ -139,9 +152,7 @@ export default function EnterprisesForm({ onSubmit }: IEnterprisesForm) {
 
       </Wrapper>
 
-      <Button type="submit" disabled={!isFormValid}>
-        Cadastrar
-      </Button>
-    </Form>
+      
+    </Container>
   );
 }

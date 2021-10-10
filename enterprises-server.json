@@ -6,6 +6,27 @@
       "address": "Rua Dório Silva, 100 - Vila Guaranhuns, Vila Velha",
       "type": "Residencial",
       "condition": "Lançamento"
+    },
+    {
+      "condition": "Lançamento",
+      "name": "apartamento",
+      "type": "Residencial",
+      "address": "Rua alguma coisa - 56162 awdaw",
+      "id": 2
+    },
+    {
+      "condition": "Pronto pra morar",
+      "name": "casa abc",
+      "type": "Residencial",
+      "address": "Rua alguma coisa - 12335 awdaw",
+      "id": 3
+    },
+    {
+      "condition": "Lançamento",
+      "name": "",
+      "type": "Residencial",
+      "address": "Rua alguma coisa -  awdaw",
+      "id": 5
     }
   ]
 }

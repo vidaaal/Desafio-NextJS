@@ -69,7 +69,7 @@ export default function Home() {
 
       <Header>
         <h2>Empreendimentos</h2>
-        <Link href="/newenterprise">
+        <Link href="/new">
           <a className="add-button">
             Adicionar +
           </a>
@@ -95,7 +95,7 @@ export default function Home() {
                 <div className="address">
                   <h3>{enterprise.name}</h3>
                   <div className="actions">
-                    <Link href={`/editenterprise/${enterprise.id}`}>
+                    <Link href={`/edit/${enterprise.id}`}>
                       <a>
                         <img src="/images/EditIcon.svg" alt="Ícone de Edição" />
                       </a>
