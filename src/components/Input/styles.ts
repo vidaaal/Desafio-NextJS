@@ -9,14 +9,12 @@ export const Container = styled.div<IInput>`
     border: 0;
     width: 100%;
     font-size: 1rem;
-    padding-left: 2px;
+    padding-left: 4px;
     appearance: none;
     -moz-appearance: textfield;
 
     ::placeholder {
-      color: ${({ theme }) => theme.text.primary};
-
-      color: ${({ error, theme }) => error && theme.danger.main};
+      color: ${({ theme, error }) => (error ? theme.danger.main : theme.text.primary)};
     }
 
     
@@ -33,7 +31,7 @@ export const Container = styled.div<IInput>`
     width: 100%;
     height: 2px;
     background: ${({ theme }) => theme.outline.gray_dark};
-    margin-top: 16px;
+    margin-top: 9px;
 
     ${({ error }) => error && css`
       background: ${({ theme }) => theme.danger.main};

@@ -4,12 +4,12 @@ import { Container } from './styles';
 
 interface ISelect extends SelectHTMLAttributes<HTMLSelectElement> {
   children: ReactNode;
-  error?: boolean;
+
 }
 
-export default function Select({ children, error, ...rest }: ISelect) {
+export default function Select({ children, ...rest }: ISelect) {
   return (
-    <Container error={error}>
+    <Container>
       <select {...rest}>
         {children}
       </select>

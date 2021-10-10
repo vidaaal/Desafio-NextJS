@@ -35,8 +35,8 @@ export default function Home() {
       try {
         const { data } = await api('/posts');
         setEnterprises(data);
-      } catch (err: any) {
-        console.log(err.response);
+      } catch {
+        return;
       } finally {
         setIsLoading(false);
       }
@@ -56,8 +56,8 @@ export default function Home() {
         const { data } = await api('/posts');
         setEnterprises(data);
       }
-    } catch (err: any) {
-      console.log(err);
+    } catch {
+      return;
     } finally {
       setIsLoading(false);
     }

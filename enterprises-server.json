@@ -1,32 +1,31 @@
 {
   "posts": [
     {
-      "id": 1,
-      "name": "Villega Vila Velha",
-      "address": "Rua Dório Silva, 100 - Vila Guaranhuns, Vila Velha",
+      "condition": "Em obras",
+      "name": "primeiro",
       "type": "Residencial",
-      "condition": "Lançamento"
+      "address": "Rua alguma coisa - 54321 awdaw",
+      "cep": "12345-675",
+      "houseNumber": "54321",
+      "id": 1
     },
     {
-      "condition": "Lançamento",
-      "name": "apartamento",
+      "condition": "Em obras",
+      "name": "segundo",
       "type": "Residencial",
-      "address": "Rua alguma coisa - 56162 awdaw",
+      "address": "Rua alguma coisa - 13515 awdaw",
+      "cep": "13243-564",
+      "houseNumber": "13515",
       "id": 2
     },
     {
-      "condition": "Pronto pra morar",
-      "name": "casa abc",
-      "type": "Residencial",
-      "address": "Rua alguma coisa - 12335 awdaw",
-      "id": 3
-    },
-    {
       "condition": "Lançamento",
-      "name": "",
+      "name": "sla",
       "type": "Residencial",
-      "address": "Rua alguma coisa -  awdaw",
-      "id": 5
+      "address": "Rua alguma coisa - 123124 awdaw",
+      "cep": "51515-525",
+      "houseNumber": "123124",
+      "id": 3
     }
   ]
 }

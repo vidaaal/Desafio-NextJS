@@ -1,8 +1,8 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import {
   FormEvent, useEffect, useState, ChangeEvent,
 } from 'react';
-import axios from 'axios';
 
 import Button from '../../components/Button';
 import Header from '../../components/Header';
@@ -21,15 +21,54 @@ import {
 import Loader from '../../components/Loader';
 import formatHouseNumber from '../../utils/formatHouseNumber';
 
-export default function newCard() {
+interface IEditData {
+  id: number;
+  condition: string;
+  name: string;
+  type: string;
+  address: string;
+  cep: string;
+}
+
+export default function editEnterprise() {
   const [isToast, setIsToast] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const [condition, setCondition] = useState('Lançamento');
   const [name, setName] = useState('');
   const [type, setType] = useState('Residencial');
   const [cep, setCep] = useState('');
   const [houseNumber, setHouseNumber] = useState('');
+
+  const [editData, setEditData] = useState<IEditData>();
+
+  const { query, push } = useRouter();
+
+  useEffect(() => {
+    (async () => {
+      if (!query.id) {
+        return;
+      }
+
+      setIsLoading(true);
+      const { data } = await api(`/posts/${query.id}`);
+      setEditData(data);
+      setIsLoading(false);
+    })();
+  }, [query]);
+
+  useEffect(() => {
+    if (!editData) {
+      return;
+    }
+
+    setCondition(editData.condition);
+    setName(editData.name);
+    setType(editData.type);
+    setCep(editData.cep);
+    const formattedHouseNumber = editData.address.split(' ').splice(4, 1).join('');
+    setHouseNumber(formattedHouseNumber);
+  }, [editData]);
 
   const {
     setError, removeError, getErrorMessageByFieldName, errors,
@@ -93,7 +132,7 @@ export default function newCard() {
 
     try {
       setIsLoading(true);
-      await api.post('/posts/', data);
+      await api.put(`/posts/${query.id}`, data);
       setIsLoading(false);
       setIsToast(true);
     } catch {
@@ -103,7 +142,7 @@ export default function newCard() {
 
   return (
     <Container>
-      {isToast && <Success message="Empreendimento cadastrado com sucesso!" />}
+      {isToast && <Success message="Empreendimento atualizado com sucesso!" />}
       {isLoading && <Loader />}
 
       <Header>
@@ -111,7 +150,7 @@ export default function newCard() {
           <Link href="/">
             <a>
               <img src="/images/ArrowIcon.svg" alt="" />
-              <h2>Cadastro de empreendimento</h2>
+              <h2>Editar empreendimento</h2>
             </a>
 
           </Link>
@@ -179,7 +218,7 @@ export default function newCard() {
         </Wrapper>
 
         <Button type="submit" disabled={!isFormValid}>
-          Cadastrar
+          Atualizar
         </Button>
       </Form>
     </Container>

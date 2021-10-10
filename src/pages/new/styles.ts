@@ -11,6 +11,20 @@ export const Form = styled.form`
   display: flex;
   align-items: center;
   flex-direction: column;
+`;
 
+export const Wrapper = styled.div`
+  padding: 32px;
+  border-radius: 8px;
+  max-width: 622px;
   width: 100%;
+  background: ${({ theme }) => theme.background.white};
+
+  .title {
+    margin-bottom: 30px;
+  }
+
+  button {
+    margin-top: 100px;
+  }
 `;

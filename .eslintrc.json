@@ -41,7 +41,8 @@
     "react/jsx-no-bind": "off",
     "react/button-has-type": "off",
     "no-unused-vars": "off",
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "no-useless-return": "off"
   },
   "settings": {
     "import/resolver": {

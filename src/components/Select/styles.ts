@@ -12,8 +12,5 @@ export const Container = styled.div`
     width: 100%;
     height: 2px;
     background: ${({ theme }) => theme.outline.gray_dark};
-
-    
-
   }
 `;
