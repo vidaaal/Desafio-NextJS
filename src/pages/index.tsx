@@ -127,11 +127,13 @@ export default function Home() {
           ))}
         </MainContent>
 
-        <div className="load-more">
-          <Button onClick={handleLoadMore}>
-            Carregar mais
-          </Button>
-        </div>
+        {filteredEnterprises?.length >= 5 && (
+          <div className="load-more">
+            <Button onClick={handleLoadMore}>
+              Carregar mais
+            </Button>
+          </div>
+        )}
       </Wrapper>
     </Container>
   );

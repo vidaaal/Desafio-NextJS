@@ -44,6 +44,6 @@ export default function ConfirmModal({
         </div>
       </div>
     </Overlay>,
-    document.getElementById('confirmModal-root')!,
+    document.getElementById('confirmModal-root') as HTMLElement,
   );
 }
