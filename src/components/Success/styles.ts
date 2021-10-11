@@ -12,7 +12,7 @@ export const Overlay = styled.div`
   justify-content: center;
   
 
-  .loader {
+  .success {
     background: ${({ theme }) => theme.background.white};
     width: 300px;
     height: 100px;

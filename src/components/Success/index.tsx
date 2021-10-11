@@ -20,7 +20,7 @@ export default function Success({ message }: ISuccess) {
 
   return ReactDOM.createPortal(
     <Overlay>
-      <div className="loader">
+      <div className="success">
         <div className="icon">
           <img src="/images/OkIcon.svg" alt="" />
         </div>
@@ -31,6 +31,6 @@ export default function Success({ message }: ISuccess) {
         </div>
       </div>
     </Overlay>,
-    document.getElementById('loader-root')!,
+    document.getElementById('success-root')!,
   );
 }

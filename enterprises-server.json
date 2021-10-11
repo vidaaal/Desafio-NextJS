@@ -1,31 +1,13 @@
 {
   "posts": [
     {
-      "condition": "Em obras",
-      "name": "primeiro",
-      "type": "Residencial",
-      "address": "Rua alguma coisa - 54321 awdaw",
-      "cep": "12345-675",
-      "houseNumber": "54321",
-      "id": 1
-    },
-    {
-      "condition": "Em obras",
-      "name": "segundo",
-      "type": "Residencial",
-      "address": "Rua alguma coisa - 13515 awdaw",
-      "cep": "13243-564",
-      "houseNumber": "13515",
-      "id": 2
-    },
-    {
       "condition": "Lançamento",
-      "name": "sla",
+      "name": "ricardao lanches",
       "type": "Residencial",
-      "address": "Rua alguma coisa - 123124 awdaw",
-      "cep": "51515-525",
-      "houseNumber": "123124",
-      "id": 3
+      "address": "Rua Santos, 123 - Jardim Esmeralda",
+      "cep": "13454-032",
+      "houseNumber": "123",
+      "id": 1
     }
   ]
 }

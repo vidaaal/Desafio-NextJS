@@ -1,11 +1,5 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100vh;
-`;
-
 export const Form = styled.form`
   margin-top: 48px;
   display: flex;
@@ -26,5 +20,9 @@ export const Wrapper = styled.div`
 
   button {
     margin-top: 100px;
+  }
+
+  .cep-container {
+    margin: 40px 0;
   }
 `;
