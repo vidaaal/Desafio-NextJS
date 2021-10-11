@@ -8,8 +8,7 @@ export default createGlobalStyle`
   }
 
   body {
-    min-height: 100vh;
-    background: ${({ theme }) => theme.background.gray}
+    background: ${({ theme }) => theme.background.gray};
   }
 
   button, select, a {

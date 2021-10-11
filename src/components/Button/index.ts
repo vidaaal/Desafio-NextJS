@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface IButton {
-  disabled: boolean;
+  disabled?: boolean;
 }
 
 export default styled.button<IButton>`

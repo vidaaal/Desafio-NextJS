@@ -49,16 +49,6 @@ export default function EditEnterprise() {
     })();
   }, [query]);
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsToast(false);
-
-      if (isToast) {
-        push('/');
-      }
-    }, 2000);
-  }, [isToast]);
-
   async function handleSubmit(e: FormEvent<HTMLFormElement>, {
     condition,
     name,
@@ -83,6 +73,13 @@ export default function EditEnterprise() {
       await api.put(`/posts/${query.id}`, data);
       setIsLoading(false);
       setIsToast(true);
+      setTimeout(() => {
+        setIsToast(false);
+
+        if (!isToast) {
+          push('/');
+        }
+      }, 2000);
     } catch {
       return;
     }

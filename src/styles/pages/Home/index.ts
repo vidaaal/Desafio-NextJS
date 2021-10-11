@@ -10,9 +10,16 @@ export const Wrapper = styled.div`
   width: 100%;
   margin: 0 auto;
 
-  margin-top: 38px;
+  margin-top: 30px;
 
-  padding: 0 36px 36px 36px;
+  padding: 0 18px 24px 18px;
+
+  .load-more {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 16px;
+  }
 `;
 
 export const InputSearchContainer = styled.div`
@@ -62,6 +69,14 @@ export const Card = styled.div`
   display: flex;
   justify-content: space-between;
   
+  @media (max-width: 480px) {
+    flex-direction: column;
+    height: 150px;
+  }
+
+  @media (max-width: 700px) {
+    padding: 24px;
+  }
 
   main {
     display: flex;
@@ -74,6 +89,11 @@ export const Card = styled.div`
       h3 {
         font-size: 1.25rem;
         color: ${({ theme }) => theme.text.primary};
+        text-overflow: ellipsis;
+
+        @media (max-width: 500px) {
+          font-size: 1rem;
+        }
       }
 
       .actions {
@@ -102,11 +122,26 @@ export const Card = styled.div`
     p {
       color: ${({ theme }) => theme.text.secondary};
       font-size: 0.875rem;
+
+      @media (max-width: 500px) {
+        margin-top: 4px;
+        font-size: 0.8rem;
+      }
     }
   }
 
   aside {
     display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    @media (max-width: 630px) {
+      flex-direction: column;
+    }
+
+    @media (max-width: 480px) {
+      flex-direction: row;
+    }
 
     .tag {
       width: 120px;
@@ -118,13 +153,19 @@ export const Card = styled.div`
       align-items: center;
       justify-content: center;
 
+     
+
       p {
         font-size: 0.75rem;
       }
     }
 
-    > .tag {
-      margin-right: 16px;
+    .tag + .tag {
+      margin-left: 16px;
+
+      @media (max-width: 630px) {
+        margin-top: 3px;
+      }
     }
   }
 `;

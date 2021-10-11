@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export default styled.header`
   min-width: 100%;
   height: 90px;
+  padding: 12px;
   background: ${({ theme }) => theme.background.white};
 
   display: flex;
@@ -10,6 +11,10 @@ export default styled.header`
   justify-content: space-around;
 
   color: ${({ theme }) => theme.brandcolor.primary_default};
+
+  @media (max-width: 500px) {
+      font-size: 1rem;
+    }
 
   .add-button {
     
@@ -26,6 +31,10 @@ export default styled.header`
     font-weight: 700;
 
     text-decoration: none;
+
+    @media (max-width: 500px) {
+      width: 140px;
+    }
   }
   
   main {
@@ -43,6 +52,11 @@ export default styled.header`
 
     h2 {
       margin-left: 16px;
+    
     }
+  }
+
+  @media (max-width: 500px) {
+    font-size: .8rem;
   }
 `;

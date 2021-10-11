@@ -5,10 +5,12 @@ export const Form = styled.form`
   display: flex;
   align-items: center;
   flex-direction: column;
+
+  padding: 0 12px 18px 12px;
 `;
 
 export const Wrapper = styled.div`
-  padding: 32px;
+  padding: 24px;
   border-radius: 8px;
   max-width: 622px;
   width: 100%;

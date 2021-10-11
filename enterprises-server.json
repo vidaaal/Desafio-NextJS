@@ -8,6 +8,15 @@
       "cep": "13454-032",
       "houseNumber": "123",
       "id": 1
+    },
+    {
+      "condition": "Pronto pra morar",
+      "name": "casa",
+      "type": "Residencial",
+      "address": "Avenida do Comércio, 12451 - Jardim Esmeralda",
+      "cep": "13454-038",
+      "houseNumber": "12451",
+      "id": 2
     }
   ]
 }

@@ -69,6 +69,7 @@ export default function EnterpriseForm({
         return;
       }
 
+      setIsLoading(true);
       setCondition(data.condition);
       setName(data.name);
       setType(data.type);
@@ -76,8 +77,14 @@ export default function EnterpriseForm({
       setHouseNumber(data.houseNumber);
 
       if (data.cep) {
-        const response = await axios(`https://viacep.com.br/ws/${data.cep}/json/`);
-        setCepData(response.data);
+        try {
+          const response = await axios(`https://viacep.com.br/ws/${data.cep}/json/`);
+          setCepData(response.data);
+        } catch {
+          return;
+        } finally {
+          setIsLoading(false);
+        }
       }
     })();
   }, [data]);
@@ -108,8 +115,14 @@ export default function EnterpriseForm({
     }
 
     if (e.target.value.replace('-', '').length === 8) {
-      const response = await axios(`https://viacep.com.br/ws/${e.target.value.replace('-', '')}/json/`);
-      setCepData(response.data);
+      try {
+        setIsLoading(true);
+        const response = await axios(`https://viacep.com.br/ws/${e.target.value.replace('-', '')}/json/`);
+        setCepData(response.data);
+        setIsLoading(false);
+      } catch {
+        return;
+      }
     }
   }
 

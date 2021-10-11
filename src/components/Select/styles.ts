@@ -5,7 +5,10 @@ export const Container = styled.div`
     width: 100%;
     height: 38px;
     font-size: 1rem;
-    text-indent: 0px;
+
+    option {
+      width: 100%;
+    }
   }
   
   .input-border {

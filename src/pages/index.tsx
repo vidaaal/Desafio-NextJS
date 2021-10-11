@@ -11,6 +11,7 @@ import {
   Container, Wrapper, InputSearchContainer, MainContent, Card,
 } from '../styles/pages/Home';
 import ConfirmModal from '../components/ConfirmModal';
+import Button from '../components/Button';
 
 interface IEnterpriseInfo {
   id: string;
@@ -22,6 +23,7 @@ interface IEnterpriseInfo {
 
 export default function Home() {
   const [enterprises, setEnterprises] = useState<IEnterpriseInfo[]>();
+  const [numOfItems, setNumOfItems] = useState(5);
   const [searchTerm, setSearchTerm] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isDeleteVisible, setIsDeleteVisible] = useState(false);
@@ -35,7 +37,7 @@ export default function Home() {
 
     (async () => {
       try {
-        const { data } = await api('/posts');
+        const { data } = await api(`/posts?_limit=${numOfItems}`);
         setEnterprises(data);
       } catch {
         return;
@@ -43,7 +45,7 @@ export default function Home() {
         setIsLoading(false);
       }
     })();
-  }, []);
+  }, [numOfItems]);
 
   async function handleConfirmDelete(id: string) {
     setIsLoading(true);
@@ -57,6 +59,10 @@ export default function Home() {
 
   function handleCancelDelete() {
     setIsDeleteVisible(false);
+  }
+
+  function handleLoadMore() {
+    setNumOfItems((prevState) => prevState + 5);
   }
 
   return (
@@ -120,6 +126,12 @@ export default function Home() {
             </Card>
           ))}
         </MainContent>
+
+        <div className="load-more">
+          <Button onClick={handleLoadMore}>
+            Carregar mais
+          </Button>
+        </div>
       </Wrapper>
     </Container>
   );

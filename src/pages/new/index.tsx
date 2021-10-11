@@ -47,7 +47,6 @@ export default function newCard() {
       setIsLoading(true);
       await api.post('/posts/', data);
       setIsLoading(false);
-
       setIsToast(true);
       setTimeout(() => {
         setIsToast(false);
@@ -55,9 +54,11 @@ export default function newCard() {
         if (!isToast) {
           push('/');
         }
-      }, 2000);
+      }, 1800);
     } catch {
       return;
+    } finally {
+      setIsLoading(false);
     }
   }
 
