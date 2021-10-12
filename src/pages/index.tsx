@@ -13,12 +13,22 @@ import {
 import ConfirmModal from '../components/ConfirmModal';
 import Button from '../components/Button';
 
+interface AddressInterface {
+  cep: string;
+  number: string;
+  street: string;
+  state: string;
+  city: string;
+  district: string;
+  formatedAddress: string;
+}
+
 interface IEnterpriseInfo {
-  id: string;
+  id: number;
   name: string;
-  address: string;
-  type: string;
-  condition: string;
+  status: string;
+  purpose: string;
+  address: AddressInterface;
 }
 
 export default function Home() {
@@ -37,7 +47,7 @@ export default function Home() {
 
     (async () => {
       try {
-        const { data } = await api(`/posts?_limit=${numOfItems}`);
+        const { data } = await api(`/enterprises?_limit=${numOfItems}`);
         setEnterprises(data);
       } catch {
         return;
@@ -47,11 +57,11 @@ export default function Home() {
     })();
   }, [numOfItems]);
 
-  async function handleConfirmDelete(id: string) {
+  async function handleConfirmDelete(id: number) {
     setIsLoading(true);
-    await api.delete(`/posts/${id}`);
+    await api.delete(`/enterprises/${id}`);
 
-    const { data } = await api('/posts');
+    const { data } = await api('/enterprises');
     setEnterprises(data);
     setIsLoading(false);
     setIsDeleteVisible(false);
@@ -113,14 +123,14 @@ export default function Home() {
                     </button>
                   </div>
                 </div>
-                <p>{enterprise.address}</p>
+                <p>{enterprise.address.formatedAddress}</p>
               </main>
               <aside>
                 <div className="tag">
-                  <p>{enterprise.condition}</p>
+                  <p>{enterprise.status}</p>
                 </div>
                 <div className="tag">
-                  <p>{enterprise.type}</p>
+                  <p>{enterprise.purpose}</p>
                 </div>
               </aside>
             </Card>

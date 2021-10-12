@@ -9,13 +9,21 @@ import { api } from '../../services/api';
 import Success from '../../components/Success';
 import Loader from '../../components/Loader';
 
-interface INewSubmit {
-  condition: string;
-  name: string;
-  type: string;
-  address: string;
+interface AddressInterface {
   cep: string;
-  houseNumber: string;
+  number: string;
+  street: string;
+  state: string;
+  city: string;
+  district: string;
+}
+
+interface INewSubmit {
+  id: number;
+  name: string;
+  status: string;
+  purpose: string;
+  address: AddressInterface;
 }
 
 export default function newCard() {
@@ -25,27 +33,23 @@ export default function newCard() {
   const { push } = useRouter();
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>, {
-    condition,
+    status,
     name,
-    type,
+    purpose,
     address,
-    cep,
-    houseNumber,
   }: INewSubmit) {
     e.preventDefault();
 
     const data = {
-      condition,
+      status,
       name,
-      type,
+      purpose,
       address,
-      cep,
-      houseNumber,
     };
 
     try {
       setIsLoading(true);
-      await api.post('/posts/', data);
+      await api.post('/enterprises/', data);
       setIsLoading(false);
       setIsToast(true);
       setTimeout(() => {

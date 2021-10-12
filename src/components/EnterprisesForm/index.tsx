@@ -18,14 +18,22 @@ import Loader from '../Loader';
 
 import { Form, Wrapper } from './styles';
 
+interface AddressInterface {
+  cep?: string;
+  number?: string;
+  street?: string;
+  state?: string;
+  city?: string;
+  district?: string;
+  formatedAddress?: string;
+}
+
 interface IData {
   id?: number;
-  condition: string;
   name: string;
-  type: string;
-  address: string;
-  cep: string;
-  houseNumber: string;
+  status: string;
+  purpose: string;
+  address: AddressInterface;
 }
 
 interface IEnterprisesForm {
@@ -33,16 +41,15 @@ interface IEnterprisesForm {
   buttonLabel: string
   data?: IData | undefined;
   onSubmit(e: FormEvent, {
-    condition,
+    status,
     name,
-    type,
+    purpose,
     address,
-    cep,
-    houseNumber,
   }: IData): Promise<void>;
 }
 
 interface ICepData {
+  cep: string;
   logradouro: string;
   bairro: string;
   localidade: string;
@@ -54,9 +61,9 @@ export default function EnterpriseForm({
 }: IEnterprisesForm) {
   const [isLoading, setIsLoading] = useState(false);
 
-  const [condition, setCondition] = useState('Lançamento');
+  const [status, setStatus] = useState('Lançamento');
   const [name, setName] = useState('');
-  const [type, setType] = useState('Residencial');
+  const [purpose, setPurpose] = useState('Residencial');
   const [cep, setCep] = useState('');
   const [houseNumber, setHouseNumber] = useState('');
   const [cepData, setCepData] = useState<ICepData>();
@@ -70,15 +77,15 @@ export default function EnterpriseForm({
       }
 
       setIsLoading(true);
-      setCondition(data.condition);
+      setStatus(data.purpose);
       setName(data.name);
-      setType(data.type);
-      setCep(formatCep(data.cep));
-      setHouseNumber(data.houseNumber);
+      setPurpose(data.purpose);
+      setCep(formatCep(data.address.cep!));
+      setHouseNumber(data.address.number!);
 
-      if (data.cep) {
+      if (data.address) {
         try {
-          const response = await axios(`https://viacep.com.br/ws/${data.cep}/json/`);
+          const response = await axios(`https://viacep.com.br/ws/${data.address.cep}/json/`);
           setCepData(response.data);
         } catch {
           return;
@@ -136,7 +143,7 @@ export default function EnterpriseForm({
     }
   }
 
-  const address = `${cepData?.logradouro}, ${houseNumber} - ${cepData?.bairro}`;
+  const formatedAddress = `${cepData?.logradouro}, ${houseNumber} - ${cepData?.bairro}`;
 
   return (
     <>
@@ -160,12 +167,18 @@ export default function EnterpriseForm({
         <div />
       </Header>
       <Form onSubmit={(e) => onSubmit(e, {
-        condition,
+        status,
         name,
-        type,
-        address,
-        cep,
-        houseNumber,
+        purpose,
+        address: {
+          cep: cepData?.cep,
+          city: cepData?.localidade,
+          district: cepData?.uf,
+          street: cepData?.logradouro,
+          number: houseNumber,
+          state: cepData?.uf,
+          formatedAddress,
+        },
       })}
       >
         <Wrapper>
@@ -175,9 +188,9 @@ export default function EnterpriseForm({
 
           <FormGroup>
             <Select
-              onChange={(e: ChangeEvent<HTMLSelectElement>) => setCondition(e.target.value)}
-              value={condition}
-              name="codition"
+              onChange={(e: ChangeEvent<HTMLSelectElement>) => setStatus(e.target.value)}
+              value={status}
+              name="status"
             >
               <option value="Lançamento">Lançamento</option>
               <option value="Breve Lançamento">Breve lançamento</option>
@@ -197,8 +210,8 @@ export default function EnterpriseForm({
 
           <FormGroup>
             <Select
-              value={type}
-              onChange={(e: ChangeEvent<HTMLSelectElement>) => setType(e.target.value)}
+              value={purpose}
+              onChange={(e: ChangeEvent<HTMLSelectElement>) => setPurpose(e.target.value)}
             >
               <option value="Residencial">Residencial</option>
               <option value="Comercial">Comercial</option>

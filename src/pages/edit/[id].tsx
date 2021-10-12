@@ -10,23 +10,29 @@ import Loader from '../../components/Loader';
 import { api } from '../../services/api';
 import Success from '../../components/Success';
 
-interface IEditData {
-  id: number;
-  condition: string;
-  name: string;
-  type: string;
-  address: string;
+interface AddressInterface {
   cep: string;
-  houseNumber: string;
+  number: string;
+  street: string;
+  state: string;
+  city: string;
+  district: string;
+}
+
+interface IEditData {
+  id?: number;
+  name: string;
+  status: string;
+  purpose: string;
+  address: AddressInterface;
 }
 
 interface IEditSubmit {
-  condition: string;
+  id?: number;
   name: string;
-  type: string;
-  address: string;
-  cep: string;
-  houseNumber: string;
+  status: string;
+  purpose: string;
+  address: AddressInterface;
 }
 
 export default function EditEnterprise() {
@@ -43,34 +49,30 @@ export default function EditEnterprise() {
       }
 
       setIsLoading(true);
-      const { data } = await api(`/posts/${query.id}`);
+      const { data } = await api(`/enterprises/${query.id}`);
       setEditData(data);
       setIsLoading(false);
     })();
   }, [query]);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>, {
-    condition,
+    status,
     name,
-    type,
+    purpose,
     address,
-    cep,
-    houseNumber,
   }: IEditSubmit) {
     e.preventDefault();
 
     const data = {
-      condition,
+      status,
       name,
-      type,
+      purpose,
       address,
-      cep,
-      houseNumber,
     };
 
     try {
       setIsLoading(true);
-      await api.put(`/posts/${query.id}`, data);
+      await api.put(`/enterprises/${query.id}`, data);
       setIsLoading(false);
       setIsToast(true);
       setTimeout(() => {
